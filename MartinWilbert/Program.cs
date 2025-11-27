@@ -41,7 +41,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IEmailService, EmailService>(
+
 
 // Sesiones y cookies
 builder.Services.AddSession(options =>
@@ -109,6 +110,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// Add services to the container.
+builder.Services.AddRazorPages();
 var app = builder.Build();
 
 // =================== PIPELINE ======================
