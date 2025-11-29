@@ -18,6 +18,7 @@ using MartinWilbert.Middleware;
 using MartinWilbert.Models.Settings;
 using MartinWilbert.Repository;
 using MartinWilbert.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,7 +42,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IEmailService, EmailService>(
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 
 // Sesiones y cookies
@@ -51,6 +52,7 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
 builder.Services.AddHttpContextAccessor();
 
 // Autenticación

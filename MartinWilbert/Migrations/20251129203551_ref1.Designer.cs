@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MartinWilbert.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251124215929_ref")]
-    partial class @ref
+    [Migration("20251129203551_ref1")]
+    partial class ref1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
