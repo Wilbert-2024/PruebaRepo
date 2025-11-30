@@ -2,7 +2,7 @@
 
 namespace MartinWilbert.Repository
 {
-    public interface IRolesRepository
+   public interface IRolesRepository
     {
         Task<Role> AgregarAsync(Role role);
 
@@ -17,3 +17,7 @@ namespace MartinWilbert.Repository
         Task EliminarAsync(int id);
     }
 }
+
+
+
+

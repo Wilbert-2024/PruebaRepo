@@ -2,48 +2,47 @@
 using MartinWilbert.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MartinWilbert.Repository
+namespace MartinWilbert.Repositories
 {
-    public class UserRepository(AppDbContext context) : IUserRepository
+    public class UserRepository : IUserRepository
     {
-        private readonly AppDbContext _context = context;
+        private readonly AppDbContext _context;
 
-        public async Task<User> AddAsync(User user)
+        public UserRepository(AppDbContext context)
         {
-            var entry = await _context.users.AddAsync(user);
+            _context = context;
+        }
+
+        public async Task<Usuario> AddAsync(Usuario user)
+        {
+            var entry = await _context.Users.AddAsync(user);
             return entry.Entity;
-        /*    _context.users.Add(user); await _context.SaveChangesAsync();   return user;*/
         }
 
-        public async Task<User?> GetUserByEmail(string email)
+        public async Task<Usuario?> GetUserByEmail(string email)
         {
-            return await _context.users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Email == email);
+            return await _context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Email == email);
         }
 
-
-        public async Task<User?> GetUserByUserName(string userName)
+        public async Task<Usuario?> GetUserByUserName(string userName)
         {
-            return await _context.users.Include(u => u.Role).FirstOrDefaultAsync(u => u.UserName == userName);
+            return await _context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.UserName == userName);
         }
 
-        public bool ValidatePassWord(User user, string passWord)
+        public bool ValidatePassWord(Usuario user, string passWord)
         {
             return BCrypt.Net.BCrypt.EnhancedVerify(passWord, user.Password);
-                
         }
-
 
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
         }
 
-       
-
-        public async Task<User?> GetUserByRefreshTokenAsync(string refreshToken)
+        public async Task<Usuario?> GetUserByRefreshTokenAsync(string refreshToken)
         {
-
-            return await _context.users.FirstOrDefaultAsync(u => u.RefreshToken == refreshToken);
+            return await _context.Users
+                .FirstOrDefaultAsync(u => u.RefreshToken == refreshToken);
         }
     }
 }
