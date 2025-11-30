@@ -154,7 +154,7 @@ namespace MartinWilbert.Services
 
             await _userRepo.SaveAsync();
 
-            string confirmationLink = $"https://localhost: 7255/Auth/ConfirmEmail?email={user.Email}&token={encodedToken}";
+            string confirmationLink = $"https://localhost:7255/Auth/ConfirmEmail?email={user.Email}&token={encodedToken}";
 
             string htmlBody = $"""
                                 <! DOCTYPE html>
@@ -214,7 +214,7 @@ namespace MartinWilbert.Services
             user.ResetTokenExpiryTime = DateTime.UtcNow.AddHours(1); ;
             await _userRepo.SaveAsync();
 
-            string confirmationLink = $"https://localhost: 7255/Auth/ConfirmEmail?email={user.Email}&token={encodedToken}";
+            string confirmationLink = $"https://localhost:7255/Auth/ConfirmEmail?email={user.Email}&token={encodedToken}";
 
             string htmlBody = $"""
                                 <! DOCTYPE html>
